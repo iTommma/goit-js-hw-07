@@ -33,7 +33,6 @@ const onEscapeKeydown = (event) => {
 
 // Реалізація делегування на div.gallery і отримання url великого зображення.
 gallery.addEventListener("click", (event) => {
-
   event.preventDefault();
 
   const { target } = event;

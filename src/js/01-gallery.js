@@ -2,6 +2,7 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 const gallary = document.querySelector('.gallery');
+let instance;
 
 // Створення і рендер розмітки на підставі масиву даних galleryItems і наданого шаблону елемента галереї.
 const createGallary = galleryItems.map(el => {
@@ -20,8 +21,17 @@ const createGallary = galleryItems.map(el => {
         </div>`);
 } )
 
+// Закриття модаки Escape -ом
+const onEscapeKeydown = (event) => {
+  if (event.code !== "Escape") {
+    return;
+  }
+  // console.log(event.code);
+  instance.close();
+  document.removeEventListener("keydown", onEscapeKeydown);
+};
+
 // Реалізація делегування на div.gallery і отримання url великого зображення.
-let instance;
 gallary.addEventListener("click", ({target}) => {
   if (target.nodeName !== "IMG") {
     return;
@@ -33,20 +43,8 @@ gallary.addEventListener("click", ({target}) => {
   instance = basicLightbox.create(`
         <img src="${target.dataset.source}" width="800" height="600">
     `);
-
   // Відкриття модального вікна по кліку на елементі галереї.
   instance.show();
-
-  //   console.log("event.target: ", event.target);
-  //   console.log("event.currentTarget: ", event.currentTarget);
+  // Активація слухача клавіатури
+  document.addEventListener("keydown", onEscapeKeydown);
 });
-
-// Закриття модаки через Escape
-document.addEventListener('keydown', event => {
-    if (event.code === 'Escape') {
-      // console.log(event.code);
-      instance.close();
-    }
-})
-
-

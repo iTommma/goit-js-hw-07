@@ -5,7 +5,7 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector(".gallery");
 
 // створення галереї з масиву
-const createGallery = galleryItems.map(el => {
+galleryItems.map(el => {
     const { description, original, preview } = el;
     // console.log(preview);
 
@@ -15,7 +15,7 @@ const createGallery = galleryItems.map(el => {
         </a>`;
 });
 
-// налатування SimpleLightbox
+// налаштування SimpleLightbox
 new SimpleLightbox(".gallery a", {
   captionsData: "alt",
   captionPosition: "bottom",
